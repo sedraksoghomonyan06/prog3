@@ -1,9 +1,7 @@
-module.exports = class Bomb {
+var LivingCreature = require("./livingCreature.js");
+module.exports = class Bomb extends LivingCreature {
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
-        this.index = index;
-        this.multiply = 0;
+        super(x, y, index);
     }
     getNewCordinates() {
         this.directions = [

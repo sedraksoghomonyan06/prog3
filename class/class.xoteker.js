@@ -1,10 +1,9 @@
-module.exports = class Xotaker {
+var LivingCreature = require("./livingCreature.js");
+module.exports = class Xotaker extends LivingCreature {
     constructor(x, y, index) {
-        this.x = x;
-        this.y = y;
-        this.index = index;
+        super(x, y, index);
         this.kyank = 5;
-        this.multiply = 0;
+
 
 
     }
@@ -22,24 +21,16 @@ module.exports = class Xotaker {
     }
     chooseCell(character) {
         this.getNewCordinates();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.chooseCell(character);
     }
     mul() {
 
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() * emptyCells.length)
+        var newCell = emptyCells[index];
 
         if (newCell) {
+            grasseaterbazm++;
             var newX = newCell[0];
             var newY = newCell[1];
 
@@ -53,9 +44,12 @@ module.exports = class Xotaker {
     }
     eat() {
         var utel = this.chooseCell(1);
-        var cell = random(utel);
+        var index = Math.round(Math.random() * utel.length);
+        var cell = utel[index];
+
 
         if (cell) {
+            grasseaterutel++;
             var x = cell[0];
             var y = cell[1];
             matrix[this.y][this.x] = 0;
@@ -88,8 +82,10 @@ module.exports = class Xotaker {
 
     move() {
         var sharjvel = this.chooseCell(0);
-        var cell = random(sharjvel);
+        var index = Math.round(Math.random() * sharjvel.length);
+        var cell = sharjvel[index];
         if (cell) {
+            grasseatersharjvel++;
             var x = cell[0];
             var y = cell[1];
             matrix[this.y][this.x] = 0;
